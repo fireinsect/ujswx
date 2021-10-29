@@ -9,11 +9,16 @@ public class UserDO {
 
     private String email;
 
+    /*所属学院*/
     private String college;
 
+    /*所属专业*/
     private String major;
 
+    /*班级*/
     private String classs;
+
+    private String[] projectId;
 
     private int permission;
 
@@ -67,6 +72,14 @@ public class UserDO {
 
     public void setClasss(String classs) {
         this.classs = classs;
+    }
+
+    public String[] getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String[] projectId) {
+        this.projectId = projectId;
     }
 
     public int getPermission() {
