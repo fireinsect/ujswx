@@ -1,6 +1,8 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDO {
     private String id;
@@ -18,7 +20,7 @@ public class UserDO {
     /*班级*/
     private String classs;
 
-    private String[] projectId;
+    private List<ProjectDO> projects;
 
     private int permission;
 
@@ -74,12 +76,12 @@ public class UserDO {
         this.classs = classs;
     }
 
-    public String[] getProjectId() {
-        return projectId;
+    public List<ProjectDO> getProjects() {
+        return projects;
     }
 
-    public void setProjectId(String[] projectId) {
-        this.projectId = projectId;
+    public void setProjects(List<ProjectDO> projects) {
+        this.projects = projects;
     }
 
     public int getPermission() {
