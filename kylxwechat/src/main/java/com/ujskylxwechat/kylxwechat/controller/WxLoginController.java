@@ -1,5 +1,6 @@
 package com.ujskylxwechat.kylxwechat.controller;
 
+import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
 import com.ujskylxwechat.kylxwechat.pojo.UserInfo;
 import com.ujskylxwechat.kylxwechat.util.WxHttpUtil;
 import com.ujskylxwechat.kylxwechat.util.WxLoginUtil;
@@ -43,7 +44,7 @@ public class WxLoginController {
         userInfo.setOpenId(openId);
         userInfo.setSessionKey(session_key);
         System.out.println(resultMap);
-
+        System.out.println(userInfo.getUserDO().getStudent_id());
         System.out.println(userInfo.toString());
         return "Success";
     }

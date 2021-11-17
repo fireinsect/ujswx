@@ -7,7 +7,13 @@ import java.util.List;
 public class UserDO {
     private String id;
 
+    private String openid;
+
     private String name;
+
+    private String student_id;
+
+    private String mobile_number;
 
     private String email;
 
@@ -20,13 +26,37 @@ public class UserDO {
     /*班级*/
     private String classs;
 
-    private List<ProjectDO> projects;
+    private String project_id;
 
     private int permission;
 
     private LocalDateTime gmtCreated;
 
     private LocalDateTime gmtModified;
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
+
+    public String getMobile_number() {
+        return mobile_number;
+    }
+
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
+    }
 
     public String getId() {
         return id;
@@ -76,12 +106,12 @@ public class UserDO {
         this.classs = classs;
     }
 
-    public List<ProjectDO> getProjects() {
-        return projects;
+    public String getProject_id() {
+        return project_id;
     }
 
-    public void setProjects(List<ProjectDO> projects) {
-        this.projects = projects;
+    public void setProject_id(String project_id) {
+        this.project_id = project_id;
     }
 
     public int getPermission() {
@@ -107,4 +137,6 @@ public class UserDO {
     public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
+
+
 }

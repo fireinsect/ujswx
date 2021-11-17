@@ -1,5 +1,6 @@
 package com.ujskylxwechat.kylxwechat.pojo;
 
+import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
 import lombok.Data;
 
 /**
@@ -24,6 +25,8 @@ public class UserInfo {
     private String country;
 
     private String avatarUrl;
+
+    private UserDO userDO;
 
     private String openId;
 
