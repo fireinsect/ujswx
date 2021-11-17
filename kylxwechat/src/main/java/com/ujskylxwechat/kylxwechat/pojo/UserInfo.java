@@ -26,8 +26,6 @@ public class UserInfo {
 
     private String avatarUrl;
 
-    private UserDO userDO;
-
     private String openId;
 
     private String sessionKey;
