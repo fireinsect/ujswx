@@ -43,8 +43,9 @@ public class WxLoginController {
         //将获取openID和sessionKey放入userInfo类中
         userInfo.setOpenId(openId);
         userInfo.setSessionKey(session_key);
+        userInfo.getUserDO().setOpenid(openId);
         System.out.println(resultMap);
-        System.out.println(userInfo.getUserDO().getStudent_id());
+        System.out.println(userInfo.getUserDO().toString());
         System.out.println(userInfo.toString());
         return "Success";
     }

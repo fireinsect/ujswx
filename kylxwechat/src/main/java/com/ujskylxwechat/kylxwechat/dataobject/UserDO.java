@@ -28,7 +28,7 @@ public class UserDO {
 
     private String project_id;
 
-    private int permission;
+    private int permission=1;
 
     private LocalDateTime gmtCreated;
 
@@ -118,10 +118,6 @@ public class UserDO {
         return permission;
     }
 
-    public void setPermission(int permission) {
-        this.permission = permission;
-    }
-
     public LocalDateTime getGmtCreated() {
         return gmtCreated;
     }
@@ -138,5 +134,15 @@ public class UserDO {
         this.gmtModified = gmtModified;
     }
 
+    public String toString(){
+        return "name:" +this.getName()
+                +"\nopenid:"+this.getOpenid()
+                +"\nstudent_id:"+this.getStudent_id()
+                +"\nmobile_number:"+this.getMobile_number()
+                +"\nemail:"+this.getEmail()
+                +"\ncollege:"+this.getCollege()
+                +"\nmajor:"+this.getMajor()
+                +"\nclasss:"+this.getClasss();
+    }
 
 }
