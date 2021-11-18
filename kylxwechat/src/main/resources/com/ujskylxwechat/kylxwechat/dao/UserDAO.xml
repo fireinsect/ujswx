@@ -2,5 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ujskylxwechat.kylxwechat.dao.UserDAO">
-
+    <resultMap id="userResultMap" type="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
+        <id column="id" property="id"/>
+        <result column="openid" property="openid"></result>
+        <result column="name" property="name"></result>
+        <result column="student_id" property="studentId"></result>
+        <result column="mobile_number" property="mobileNumber"></result>
+        <result column="email" property="email"></result>
+        <result column="college" property="college"></result>
+        <result column="major" property="major"></result>
+        <result column="project_id" property="projectId"></result>
+        <result column="permission" property="permission"></result>
+        <result column="gmt_created" property="gmtCreated"></result>
+        <result column="gmt_modified" property="gmtModefied"></result>
+    </resultMap>
+    
+    <insert id="insert" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
+        INSERT INTO users(openid,name,student_id,mobile_number
+        ,email,college,major,project_id,permission,gmt_created,gmt_modified)
+        VALUE
+        (#{openid},#{name},#{studentId},#{mobileNumber},#{email}
+            ,#{college},#{major},#{projectId},#{permission},now(),now())
+    </insert>
 </mapper>

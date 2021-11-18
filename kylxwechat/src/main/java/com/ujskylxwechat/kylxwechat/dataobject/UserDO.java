@@ -1,8 +1,6 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDO {
     private String id;
@@ -11,9 +9,9 @@ public class UserDO {
 
     private String name;
 
-    private String student_id;
+    private String studentId;
 
-    private String mobile_number;
+    private String mobileNumber;
 
     private String email;
 
@@ -26,7 +24,7 @@ public class UserDO {
     /*班级*/
     private String classs;
 
-    private String project_id;
+    private String projectId;
 
     private int permission=1;
 
@@ -42,20 +40,20 @@ public class UserDO {
         this.openid = openid;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getMobile_number() {
-        return mobile_number;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setMobile_number(String mobile_number) {
-        this.mobile_number = mobile_number;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getId() {
@@ -106,12 +104,12 @@ public class UserDO {
         this.classs = classs;
     }
 
-    public String getProject_id() {
-        return project_id;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setProject_id(String project_id) {
-        this.project_id = project_id;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
     public int getPermission() {
@@ -137,8 +135,8 @@ public class UserDO {
     public String toString(){
         return "name:" +this.getName()
                 +"\nopenid:"+this.getOpenid()
-                +"\nstudent_id:"+this.getStudent_id()
-                +"\nmobile_number:"+this.getMobile_number()
+                +"\nstudent_id:"+this.getStudentId()
+                +"\nmobile_number:"+this.getMobileNumber()
                 +"\nemail:"+this.getEmail()
                 +"\ncollege:"+this.getCollege()
                 +"\nmajor:"+this.getMajor()
