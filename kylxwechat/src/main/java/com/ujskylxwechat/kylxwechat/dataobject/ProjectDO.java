@@ -1,7 +1,15 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+/**
+ * @author HP
+ */
+@Data
 public class ProjectDO {
-    private long id;
+    private Long id;
 
     private String title;
 
@@ -9,69 +17,49 @@ public class ProjectDO {
 
     private String classs;
 
-    /*项目类型识别码*/
+    /**
+     * 项目类型识别码
+     */
     private String sign;
 
-    /*指导老师名称*/
+    /**
+     * 指导老师名称
+     */
     private String teacherName;
 
-    /*指导老师学院*/
-    private String teachColl;
+    /**
+     * 指导老师学院
+     */
+    private String teachCollege;
 
-    public long getId() {
-        return id;
-    }
+    /**
+     * 主持人id
+     */
+    private Long leaderId;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    /**
+     * 文件路径
+     */
+    private String filePath;
 
-    public String getTitle() {
-        return title;
-    }
+    /**
+     * 参与者1的id
+     */
+    private Long invitee1Id;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    /**
+     * 参与者2的id
+     */
+    private Long invitee2Id;
 
-    public String getType() {
-        return type;
-    }
+    /**
+     * 参与者3的id
+     */
+    private Long invitee3Id;
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    private LocalDateTime gmtCreated;
 
-    public String getClasss() {
-        return classs;
-    }
+    private LocalDateTime gmtModified;
 
-    public void setClasss(String classs) {
-        this.classs = classs;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public String getTeachColl() {
-        return teachColl;
-    }
-
-    public void setTeachColl(String teachColl) {
-        this.teachColl = teachColl;
-    }
 
 }

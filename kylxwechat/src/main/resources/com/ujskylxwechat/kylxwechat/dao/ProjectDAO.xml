@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ujskylxwechat.kylxwechat.dao.ProjectDAO">
+    <resultMap id="projectResultMap" type="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+        <id column="id" property="id"/>
+        <result column="type" property="type"></result>
+        <result column="classs" property="classs"></result>
+        <result column="sign" property="sign"></result>
+        <result column="title" property="title"></result>
+        <result column="teacher_name" property="teacherName"></result>
+        <result column="teacher_college" property="teacherCollege"></result>
+        <result column="leader_id" property="leaderId"></result>
+        <result column="filepath" property="filePath"></result>
+        <result column="invitee1_id" property="invitee1Id"></result>
+        <result column="invitee2_id" property="invitee2Id"></result>
+        <result column="invitee3_id" property="invitee3Id"></result>
+        <result column="gmt_created" property="gmtCreated"></result>
+        <result column="gmt_modified" property="gmtModefied"></result>
+    </resultMap>
+    <insert id="addProject" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO" >
+        INSERT INTO project (type, classs, sign,title,teacher_name,teacher_college,leader_id,filepath,invitee1_id,invitee2_id,invitee3_id,gmt_created,gmt_modified)
+        VALUES(#{type},#{classs},#{sign},#{title},#{teacherName},#{teacherCollege},#{leaderId},#{filePath},#{invitee1Id},#{invitee2Id},#{invitee3Id},now(),now())
+    </insert>
+
+</mapper>

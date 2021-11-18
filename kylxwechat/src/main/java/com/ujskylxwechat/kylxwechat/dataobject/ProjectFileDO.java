@@ -1,5 +1,8 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
+import lombok.Data;
+
+@Data
 public class ProjectFileDO {
     private String id;
 
@@ -9,27 +12,5 @@ public class ProjectFileDO {
     /*结题文档地址*/
     private String overUrl;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFileUrl() {
-        return fileUrl;
-    }
-
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl;
-    }
-
-    public String getOverUrl() {
-        return overUrl;
-    }
-
-    public void setOverUrl(String overUrl) {
-        this.overUrl = overUrl;
-    }
 }

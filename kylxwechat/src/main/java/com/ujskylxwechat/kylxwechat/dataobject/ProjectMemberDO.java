@@ -1,5 +1,8 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
+import lombok.Data;
+
+@Data
 public class ProjectMemberDO {
     private long id;
 

@@ -1,7 +1,10 @@
 package com.ujskylxwechat.kylxwechat.dataobject;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 public class UserDO {
     private String id;
 
@@ -32,106 +35,9 @@ public class UserDO {
 
     private LocalDateTime gmtModified;
 
-    public String getOpenid() {
-        return openid;
-    }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCollege() {
-        return college;
-    }
-
-    public void setCollege(String college) {
-        this.college = college;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public String getClasss() {
-        return classs;
-    }
-
-    public void setClasss(String classs) {
-        this.classs = classs;
-    }
-
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
-    public int getPermission() {
-        return permission;
-    }
-
-    public LocalDateTime getGmtCreated() {
-        return gmtCreated;
-    }
-
-    public void setGmtCreated(LocalDateTime gmtCreated) {
-        this.gmtCreated = gmtCreated;
-    }
-
-    public LocalDateTime getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(LocalDateTime gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
+    @Override
     public String toString(){
         return "name:" +this.getName()
                 +"\nopenid:"+this.getOpenid()
