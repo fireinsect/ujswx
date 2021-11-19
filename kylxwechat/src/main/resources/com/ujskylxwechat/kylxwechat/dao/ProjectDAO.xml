@@ -18,7 +18,8 @@
         <result column="gmt_created" property="gmtCreated"></result>
         <result column="gmt_modified" property="gmtModefied"></result>
     </resultMap>
-    <insert id="addProject" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO" >
+    <insert id="create" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO project (type, classs, sign,title,teacher_name,teacher_college,leader_id,filepath,invitee1_id,invitee2_id,invitee3_id,gmt_created,gmt_modified)
         VALUES(#{type},#{classs},#{sign},#{title},#{teacherName},#{teacherCollege},#{leaderId},#{filePath},#{invitee1Id},#{invitee2Id},#{invitee3Id},now(),now())
     </insert>

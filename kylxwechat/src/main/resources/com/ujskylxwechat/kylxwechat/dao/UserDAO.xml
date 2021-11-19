@@ -11,17 +11,23 @@
         <result column="email" property="email"></result>
         <result column="college" property="college"></result>
         <result column="major" property="major"></result>
+        <result column="classs" property="classs"></result>
         <result column="project_id" property="projectId"></result>
         <result column="permission" property="permission"></result>
         <result column="gmt_created" property="gmtCreated"></result>
         <result column="gmt_modified" property="gmtModefied"></result>
     </resultMap>
     
-    <insert id="insert" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
-        INSERT INTO users(openid,name,student_id,mobile_number
-        ,email,college,major,project_id,permission,gmt_created,gmt_modified)
+    <insert id="insert" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO"
+    useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(openid,name,student_id,mobile_number
+        ,email,college,major,classs,project_id,permission,gmt_created,gmt_modified)
         VALUE
         (#{openid},#{name},#{studentId},#{mobileNumber},#{email}
-            ,#{college},#{major},#{projectId},#{permission},now(),now())
+            ,#{college},#{major},#{classs},#{projectId},#{permission},now(),now())
     </insert>
+
+    <select id="selectbyopenid" resultMap="userResultMap">
+        select * from user where openid=#{openid} limit 1
+    </select>
 </mapper>

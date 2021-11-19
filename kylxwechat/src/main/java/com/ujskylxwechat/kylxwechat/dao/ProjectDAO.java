@@ -1,5 +1,6 @@
 package com.ujskylxwechat.kylxwechat.dao;
 
+import com.ujskylxwechat.kylxwechat.dataobject.ProjectDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,4 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProjectDAO {
+    public int create(ProjectDO projectDO);
 }
