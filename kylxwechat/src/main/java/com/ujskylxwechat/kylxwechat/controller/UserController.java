@@ -29,6 +29,9 @@ public class UserController {
     @PostMapping("selectbyopenid")
     @ResponseBody
     public String selectbyopenid(String openid){
+        System.out.println("openid:"+openid);
+//        openid=openid.replace("openid=","");
+//        System.out.println("openid:"+openid);
         List<UserDO> list= userDAO.selectbyopenid(openid);
         int len=list.size();
         if(len==1){

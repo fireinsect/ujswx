@@ -15,7 +15,7 @@
         <result column="project_id" property="projectId"></result>
         <result column="permission" property="permission"></result>
         <result column="gmt_created" property="gmtCreated"></result>
-        <result column="gmt_modified" property="gmtModefied"></result>
+        <result column="gmt_modified" property="gmtModified"></result>
     </resultMap>
     
     <insert id="insert" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO"
