@@ -30,4 +30,21 @@
     <select id="selectbyopenid" resultMap="userResultMap">
         select * from user where openid=#{openid} limit 1
     </select>
+
+<!-- 改变用户的项目编号-->
+    <update id="updateprojectidforuser" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
+        update user
+        <set>
+            project_id=#{projectName},
+            gmt_modified=now()
+        </set>
+        <where>
+            <if test="studentId!=null">
+                student_id=#{studentId}
+            </if>
+            <if test="openid!=null">
+                openid=#{openid}
+            </if>
+        </where>
+    </update>
 </mapper>

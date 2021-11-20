@@ -33,7 +33,7 @@ public class ProjectDO {
     private String teachCollege;
 
     /**
-     * 主持人id
+     * 主持人学号
      */
     private Long leaderId;
 
@@ -43,17 +43,17 @@ public class ProjectDO {
     private String filePath;
 
     /**
-     * 参与者1的id
+     * 参与者1的学号
      */
     private Long invitee1Id;
 
     /**
-     * 参与者2的id
+     * 参与者2的学号
      */
     private Long invitee2Id;
 
     /**
-     * 参与者3的id
+     * 参与者3的学号
      */
     private Long invitee3Id;
 

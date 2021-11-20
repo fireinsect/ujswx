@@ -11,4 +11,6 @@ public interface UserDAO {
     int insert(UserDO userDO);
 
     List<UserDO> selectbyopenid(@Param("openid")String openid);
+
+    int updateprojectidforuser(@Param("openid")String openid,@Param("studentId")String studentId,@Param("projectId")String projectId);
 }

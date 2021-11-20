@@ -35,9 +35,9 @@ public class UserController {
         List<UserDO> list= userDAO.selectbyopenid(openid);
         int len=list.size();
         if(len==1){
-            return "success";
+            return list.get(0).getStudentId();
         }else{
-            return len+"";
+            return "fail";
         }
     }
 }
