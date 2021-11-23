@@ -23,5 +23,20 @@
         INSERT INTO project (type, classs, sign,title,teacher_name,teacher_college,leader_id,filepath,invitee1_id,invitee2_id,invitee3_id,gmt_created,gmt_modified)
         VALUES(#{type},#{classs},#{sign},#{title},#{teacherName},#{teachCollege},#{leaderId},#{filePath},#{invitee1Id},#{invitee2Id},#{invitee3Id},now(),now())
     </insert>
+    
+    <select id="searchByLeaderId" resultMap="projectResultMap">
+        select * from project where leader_id=#{leaderId} limit 1
+    </select>
+
+
+    <!-- 插入项目的参与者id-->
+    <update id="updateInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+        update project
+        <set>
+            project_id=#{projectId},
+            gmt_modified=now()
+        </set>
+        where  leader_id=#{leaderId}
+    </update>
 
 </mapper>

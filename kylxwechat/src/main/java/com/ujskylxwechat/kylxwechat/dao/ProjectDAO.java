@@ -1,7 +1,11 @@
 package com.ujskylxwechat.kylxwechat.dao;
 
 import com.ujskylxwechat.kylxwechat.dataobject.ProjectDO;
+import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author peiqi
@@ -12,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProjectDAO {
-    public int create(ProjectDO projectDO);
+     int create(ProjectDO projectDO);
+     List<ProjectDO> searchByLeaderId(@Param("leaderId") String leaderId);
 }

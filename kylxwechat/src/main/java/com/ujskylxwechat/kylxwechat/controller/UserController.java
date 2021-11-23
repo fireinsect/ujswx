@@ -12,8 +12,9 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @PostMapping("/adduser")
     @ResponseBody
@@ -28,11 +29,9 @@ public class UserController {
 
     @PostMapping("selectbyopenid")
     @ResponseBody
-    public String selectbyopenid(String openid){
+    public String selectByOpenid(String openid){
         System.out.println("openid:"+openid);
-//        openid=openid.replace("openid=","");
-//        System.out.println("openid:"+openid);
-        List<UserDO> list= userDAO.selectbyopenid(openid);
+        List<UserDO> list= userDAO.selectByOpenid(openid);
         int len=list.size();
         if(len==1){
             return list.get(0).getStudentId();

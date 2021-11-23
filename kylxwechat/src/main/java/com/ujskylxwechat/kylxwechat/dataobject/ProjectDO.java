@@ -35,7 +35,7 @@ public class ProjectDO {
     /**
      * 主持人学号
      */
-    private Long leaderId;
+    private String leaderId;
 
     /**
      * 文件路径
@@ -45,17 +45,17 @@ public class ProjectDO {
     /**
      * 参与者1的学号
      */
-    private Long invitee1Id;
+    private String invitee1Id;
 
     /**
      * 参与者2的学号
      */
-    private Long invitee2Id;
+    private String invitee2Id;
 
     /**
      * 参与者3的学号
      */
-    private Long invitee3Id;
+    private String invitee3Id;
 
     private LocalDateTime gmtCreated;
 

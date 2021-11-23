@@ -27,24 +27,21 @@
             ,#{college},#{major},#{classs},#{projectId},#{permission},now(),now())
     </insert>
 
-    <select id="selectbyopenid" resultMap="userResultMap">
+    <select id="selectByOpenid" resultMap="userResultMap">
         select * from user where openid=#{openid} limit 1
     </select>
+    <select id="selectByStudentId" resultMap="userResultMap">
+        select * from user where student_id=#{studentId} limit 1
+    </select>
+
 
 <!-- 改变用户的项目编号-->
-    <update id="updateprojectidforuser" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
+    <update id="updateProjectIdForUser" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
         update user
         <set>
-            project_id=#{projectName},
+            project_id=#{projectId},
             gmt_modified=now()
         </set>
-        <where>
-            <if test="studentId!=null">
-                student_id=#{studentId}
-            </if>
-            <if test="openid!=null">
-                openid=#{openid}
-            </if>
-        </where>
+            where  student_id=#{studentId}
     </update>
 </mapper>

@@ -9,8 +9,15 @@ import java.util.List;
 @Mapper
 public interface UserDAO {
     int insert(UserDO userDO);
+    List<UserDO> selectByOpenid(@Param("openid")String openid);
 
-    List<UserDO> selectbyopenid(@Param("openid")String openid);
+    /**
+     * 找到此学号的同学
+     * @param studentId
+     * @return
+     */
+    List<UserDO> selectByStudentId(@Param("studentId") String studentId);
 
-    int updateprojectidforuser(@Param("openid")String openid,@Param("studentId")String studentId,@Param("projectId")String projectId);
+
+    int updateProjectIdForUser(UserDO userDO);
 }
