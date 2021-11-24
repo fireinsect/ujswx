@@ -17,5 +17,8 @@ import java.util.List;
 @Mapper
 public interface ProjectDAO {
      int create(ProjectDO projectDO);
+
      List<ProjectDO> searchByLeaderId(@Param("leaderId") String leaderId);
+
+     int insertInviteeId(ProjectDO projectDO);
 }

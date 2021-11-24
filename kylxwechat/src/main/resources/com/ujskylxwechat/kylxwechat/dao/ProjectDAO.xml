@@ -16,27 +16,50 @@
         <result column="invitee2_id" property="invitee2Id"></result>
         <result column="invitee3_id" property="invitee3Id"></result>
         <result column="gmt_created" property="gmtCreated"></result>
-        <result column="gmt_modified" property="gmtModefied"></result>
+        <result column="gmt_modified" property="gmtModified"></result>
     </resultMap>
     <insert id="create" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO project (type, classs, sign,title,teacher_name,teacher_college,leader_id,filepath,invitee1_id,invitee2_id,invitee3_id,gmt_created,gmt_modified)
-        VALUES(#{type},#{classs},#{sign},#{title},#{teacherName},#{teachCollege},#{leaderId},#{filePath},#{invitee1Id},#{invitee2Id},#{invitee3Id},now(),now())
+        VALUES(#{type},#{classs},#{sign},#{title},#{teacherName},#{teacherCollege},#{leaderId},#{filePath},#{invitee1Id},#{invitee2Id},#{invitee3Id},now(),now())
     </insert>
     
     <select id="searchByLeaderId" resultMap="projectResultMap">
-        select * from project where leader_id=#{leaderId} limit 1
+        select * from project where leader_id=#{leaderId}
     </select>
 
 
     <!-- 插入项目的参与者id-->
-    <update id="updateInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+<!--    <insert id="insertInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO"-->
+<!--            useGeneratedKeys="true" keyProperty="id">-->
+<!--        <if test="invitee1Id==null">-->
+<!--            INSERT INTO project(invitee1_id) VALUES (#{invitee1Id})-->
+<!--        </if>-->
+<!--        <if test="invitee1Id!=null">-->
+<!--            INSERT INTO project(invitee2_id) VALUES (#{invitee2Id})-->
+<!--        </if>-->
+<!--        <if test="invitee2Id!=null">-->
+<!--            INSERT INTO project(invitee3_id) VALUES (#{invitee3Id})-->
+<!--        </if>-->
+
+<!--    </insert>-->
+<!--    改变参与者id-->
+    <update id="insertInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
         update project
         <set>
-            project_id=#{projectId},
-            gmt_modified=now()
+            <if test="invitee1Id == null">
+                invitee1_id = #{invitee1Id,jdbcType=VARCHAR}
+            </if>
+<!--            <if test="invitee2Id == null">-->
+<!--                invitee2_id = #{invitee2Id}-->
+<!--            </if>-->
+<!--            <if test="invitee3Id == null">-->
+<!--                invitee3_id = #{invitee3Id}-->
+<!--            </if>-->
+            gmt_modified = now()
         </set>
-        where  leader_id=#{leaderId}
+
+        where id=#{id}
     </update>
 
 </mapper>

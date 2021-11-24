@@ -30,7 +30,7 @@ public class ProjectDO {
     /**
      * 指导老师学院
      */
-    private String teachCollege;
+    private String teacherCollege;
 
     /**
      * 主持人学号
@@ -45,6 +45,7 @@ public class ProjectDO {
     /**
      * 参与者1的学号
      */
+
     private String invitee1Id;
 
     /**
