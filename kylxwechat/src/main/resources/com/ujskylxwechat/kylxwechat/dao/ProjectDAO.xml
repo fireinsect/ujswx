@@ -48,7 +48,7 @@
         update project
         <set>
             <if test="invitee1Id == null">
-                invitee1_id = #{invitee1Id,jdbcType=VARCHAR}
+                invitee1_id=#{invitee1Id},
             </if>
 <!--            <if test="invitee2Id == null">-->
 <!--                invitee2_id = #{invitee2Id}-->
@@ -56,10 +56,10 @@
 <!--            <if test="invitee3Id == null">-->
 <!--                invitee3_id = #{invitee3Id}-->
 <!--            </if>-->
-            gmt_modified = now()
+            gmt_modified=now()
         </set>
 
-        where id=#{id}
+        where leader_id=#{leaderId}
     </update>
 
 </mapper>

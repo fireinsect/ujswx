@@ -42,7 +42,6 @@ public class WxHttpUtil {
             log.error("验证openId的http返回的body内容json转Map转换异常 jsonResult={}", jsonResult);
             throw new IOException("内容json转Map转换异常");
         }
-
         return resultMap;
     }
 }
