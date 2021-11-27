@@ -49,23 +49,19 @@ public class ProjectController {
         List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
         //拿到第一个项目
         ProjectDO projectDO = projects.get(0);
+        int res;
         System.out.println(projectDO.toString());
-//        if (projectDO.getInvitee1Id()==null){
-//            projectDO.setInvitee1Id(inviteeId);
-//        }else if (projectDO.getInvitee2Id()==null&&projectDO.getInvitee1Id()!=null){
-//            projectDO.setInvitee2Id(inviteeId);
-//        }else if (projectDO.getInvitee3Id()==null&&projectDO.getInvitee1Id()!=null&&projectDO.getInvitee2Id()!=null){
-//            projectDO.setInvitee3Id(inviteeId);
-//        }else{
-//            return "fail";
-//        }
-        projectDO.setInvitee1Id(inviteeId);
-//        int res = projectDAO.insertInviteeId(projectDO);
-
+        if (projectDO.getInvitee1Id()==null){
+           res  = projectDAO.insertInvitee1Id(inviteeId,leaderId);
+        }else if (projectDO.getInvitee2Id()==null&&projectDO.getInvitee1Id()!=null){
+            res  = projectDAO.insertInvitee2Id(inviteeId,leaderId);
+        }else if (projectDO.getInvitee3Id()==null&&projectDO.getInvitee1Id()!=null&&projectDO.getInvitee2Id()!=null){
+            res  = projectDAO.insertInvitee3Id(inviteeId,leaderId);
+        }else{
+            return "fail";
+        }
 
         SqlSession session = SqlSessionUtil.getSqlSession();
-
-        int res = session.update("insertInviteeId", projectDO);
         System.out.println(res);
         System.out.println(projectDO.toString());
         session.commit();
@@ -75,9 +71,6 @@ public class ProjectController {
             return "fail";
         }
 
-//        System.out.println(leaderId);
-//        System.out.println(inviteeId);
-//        return "fail";
 
     }
 }

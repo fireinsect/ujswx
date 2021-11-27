@@ -20,5 +20,7 @@ public interface ProjectDAO {
 
      List<ProjectDO> searchByLeaderId(@Param("leaderId") String leaderId);
 
-     int insertInviteeId(ProjectDO projectDO);
+     int insertInvitee1Id(String inviteeId,String leaderId);
+     int insertInvitee2Id(String inviteeId,String leaderId);
+     int insertInvitee3Id(String inviteeId,String leaderId);
 }

@@ -28,38 +28,14 @@
         select * from project where leader_id=#{leaderId}
     </select>
 
-
-    <!-- 插入项目的参与者id-->
-<!--    <insert id="insertInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO"-->
-<!--            useGeneratedKeys="true" keyProperty="id">-->
-<!--        <if test="invitee1Id==null">-->
-<!--            INSERT INTO project(invitee1_id) VALUES (#{invitee1Id})-->
-<!--        </if>-->
-<!--        <if test="invitee1Id!=null">-->
-<!--            INSERT INTO project(invitee2_id) VALUES (#{invitee2Id})-->
-<!--        </if>-->
-<!--        <if test="invitee2Id!=null">-->
-<!--            INSERT INTO project(invitee3_id) VALUES (#{invitee3Id})-->
-<!--        </if>-->
-
-<!--    </insert>-->
-<!--    改变参与者id-->
-    <update id="insertInviteeId" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
-        update project
-        <set>
-            <if test="invitee1Id == null">
-                invitee1_id=#{invitee1Id},
-            </if>
-<!--            <if test="invitee2Id == null">-->
-<!--                invitee2_id = #{invitee2Id}-->
-<!--            </if>-->
-<!--            <if test="invitee3Id == null">-->
-<!--                invitee3_id = #{invitee3Id}-->
-<!--            </if>-->
-            gmt_modified=now()
-        </set>
-
-        where leader_id=#{leaderId}
+<!--    插入参与者id-->
+    <update id="insertInvitee1Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+        update project set invitee1_id =#{param1} where leader_id = #{param2} limit 1
     </update>
-
+    <update id="insertInvitee2Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+        update project set invitee2_id =#{param1} where leader_id = #{param2} limit 1
+    </update>
+    <update id="insertInvitee3Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
+        update project set invitee3_id =#{param1},gmt_modified=now() where leader_id = #{param2} limit 1
+    </update>
 </mapper>
