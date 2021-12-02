@@ -73,4 +73,19 @@ public class ProjectController {
 
 
     }
+
+    @PostMapping("searchbyleaderid")
+    @ResponseBody
+    public int searchbyleaderid(@RequestParam("leaderId")String leaderId){
+        System.out.println(1);
+        System.out.println(leaderId);
+        System.out.println(projectDAO.searchByLeaderId(leaderId).size());
+        if(projectDAO.searchByLeaderId(leaderId).size()!=0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 }
+

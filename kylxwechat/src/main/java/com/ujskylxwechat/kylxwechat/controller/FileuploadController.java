@@ -25,14 +25,20 @@ public class FileuploadController {
     @ResponseBody
     public String fileupload(MultipartFile file, Model model,String openid){
         System.out.println(openid);
-//        File folder=new File(url+folderpath);
-//        if(!folder.exists()){
-//            folder.mkdir();
-//        }
         try {
 //            file.transferTo(new File(url+folderpath+"/"+file.getOriginalFilename()));
             System.out.println(file.getContentType());
-              file.transferTo(new File("E:/temp/"+file.getOriginalFilename()));
+            String fileName=file.getOriginalFilename();
+            String subname="";
+            if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0){
+                subname= fileName.substring(fileName.lastIndexOf(".")+1);
+            }
+            File check=new File("E:/temp/"+"az"+"."+subname);
+                if(check.exists()){
+                    check.delete();
+                    System.out.println("success");
+                }
+              file.transferTo(check);
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("msg","失败");

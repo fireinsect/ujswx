@@ -30,14 +30,14 @@ public class UserController {
 
     @PostMapping("selectbyopenid")
     @ResponseBody
-    public String selectByOpenid(String openid){
+    public UserDO selectByOpenid(String openid){
         System.out.println("openid:"+openid);
         List<UserDO> list= userDAO.selectByOpenid(openid);
         int len=list.size();
         if(len==1){
-            return list.get(0).getStudentId();
+            return list.get(0);
         }else{
-            return "fail";
+            return null;
         }
     }
 }
