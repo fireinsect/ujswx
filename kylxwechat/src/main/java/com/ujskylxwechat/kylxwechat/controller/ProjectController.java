@@ -38,10 +38,10 @@ public class ProjectController {
         //找到学生id为当前id的学生把项目id插入
         List<UserDO> users = userDAO.selectByStudentId(projectDO.getLeaderId());
         UserDO userDO = users.get(0);
-        System.out.println(userDO.toString());
+//        System.out.println(userDO.toString());
         userDO.setProjectId(projectDO.getSign());
         int insert = userDAO.updateProjectIdForUser(userDO);
-        System.out.println(userDO.toString());
+//        System.out.println(userDO.toString());
         if(get==1&&insert==1){
             return "success";
         }else{
@@ -51,32 +51,42 @@ public class ProjectController {
 
     @PostMapping("insertInviteeId")
     @ResponseBody
-    public String invite(@RequestParam("leaderId") String leaderId,@RequestParam("inviteeId") String inviteeId){
+    public String invite(@RequestParam("projectName") String projectName,@RequestParam("inviteeId") String inviteeId){
 
-        List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
-        //拿到第一个项目
-        ProjectDO projectDO = projects.get(0);
+       ProjectDO projectDO = projectDAO.searchByProjectName(projectName);
         int res;
-        System.out.println(projectDO.toString());
+//        System.out.println(projectDO.toString());
         if (projectDO.getInvitee1Id()==null){
-           res  = projectDAO.insertInvitee1Id(inviteeId,leaderId);
+           res  = projectDAO.insertInvitee1Id(inviteeId,projectName);
         }else if (projectDO.getInvitee2Id()==null&&projectDO.getInvitee1Id()!=null){
-            res  = projectDAO.insertInvitee2Id(inviteeId,leaderId);
+            res  = projectDAO.insertInvitee2Id(inviteeId,projectName);
         }else if (projectDO.getInvitee3Id()==null&&projectDO.getInvitee1Id()!=null&&projectDO.getInvitee2Id()!=null){
-            res  = projectDAO.insertInvitee3Id(inviteeId,leaderId);
+            res  = projectDAO.insertInvitee3Id(inviteeId,projectName);
         }else{
             return "fail";
         }
 
         SqlSession session = SqlSessionUtil.getSqlSession();
-        System.out.println(res);
-        System.out.println(projectDO.toString());
+//        System.out.println(res);
+//        System.out.println(projectDO.toString());
         session.commit();
         if(res!=0){
             return "success";
         }else{
             return "fail";
         }
+    }
+
+    @PostMapping("getProjectName")
+    @ResponseBody
+    public JSONArray getProjectName(@RequestParam("leaderId")String leaderId){
+        List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
+        ArrayList<String> list = new ArrayList<>();
+        for (ProjectDO project : projects) {
+            list.add(project.getTitle());
+        }
+        JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
+        return jsonArray;
     }
 
 

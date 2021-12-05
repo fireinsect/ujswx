@@ -28,14 +28,18 @@
         select * from project where leader_id=#{leaderId}
     </select>
 
+    <select id="searchByProjectName" resultMap="projectResultMap">
+        select * from project where title=#{projectName}
+    </select>
+
 <!--    插入参与者id-->
     <update id="insertInvitee1Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
-        update project set invitee1_id =#{param1} where leader_id = #{param2} limit 1
+        update project set invitee1_id =#{param1},gmt_modified=now() where title = #{param2} limit 1
     </update>
     <update id="insertInvitee2Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
-        update project set invitee2_id =#{param1} where leader_id = #{param2} limit 1
+        update project set invitee2_id =#{param1},gmt_modified=now() where title = #{param2} limit 1
     </update>
     <update id="insertInvitee3Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
-        update project set invitee3_id =#{param1},gmt_modified=now() where leader_id = #{param2} limit 1
+        update project set invitee3_id =#{param1},gmt_modified=now() where title = #{param2} limit 1
     </update>
 </mapper>
