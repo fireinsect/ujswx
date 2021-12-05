@@ -39,7 +39,7 @@ public class ProjectController {
         List<UserDO> users = userDAO.selectByStudentId(projectDO.getLeaderId());
         UserDO userDO = users.get(0);
 //        System.out.println(userDO.toString());
-        userDO.setProjectId(projectDO.getSign());
+        userDO.setProjectId(projectDO.getId());
         int insert = userDAO.updateProjectIdForUser(userDO);
 //        System.out.println(userDO.toString());
         if(get==1&&insert==1){

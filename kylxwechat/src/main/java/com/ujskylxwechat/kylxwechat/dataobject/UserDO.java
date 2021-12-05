@@ -27,7 +27,7 @@ public class UserDO {
     /*班级*/
     private String classs;
 
-    private String projectId;
+    private Long projectId;
 
     private int permission=1;
 
