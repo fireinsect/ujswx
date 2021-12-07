@@ -17,8 +17,8 @@ public class ProjectMessage implements Serializable {
     private String projectName;
     private String leaderId;
     /**
-     * 参与者id集合
+     * 参与者id与name集合
      */
     private ArrayList<String> inviteeIds;
-
+    private ArrayList<String> inviteeNames;
 }

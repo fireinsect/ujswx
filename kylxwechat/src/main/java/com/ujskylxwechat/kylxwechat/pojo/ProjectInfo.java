@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class ProjectInfo implements Serializable {
+    private Long projectId;
     private String projectName;
     private String projectType;
     private String projectClass;

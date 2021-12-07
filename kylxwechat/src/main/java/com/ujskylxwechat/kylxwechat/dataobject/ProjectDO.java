@@ -42,21 +42,21 @@ public class ProjectDO {
      */
     private String filePath;
 
-    /**
-     * 参与者1的学号
-     */
-
-    private String invitee1Id;
-
-    /**
-     * 参与者2的学号
-     */
-    private String invitee2Id;
-
-    /**
-     * 参与者3的学号
-     */
-    private String invitee3Id;
+//    /**
+//     * 参与者1的学号
+//     */
+//
+//    private String invitee1Id;
+//
+//    /**
+//     * 参与者2的学号
+//     */
+//    private String invitee2Id;
+//
+//    /**
+//     * 参与者3的学号
+//     */
+//    private String invitee3Id;
 
     private LocalDateTime gmtCreated;
 

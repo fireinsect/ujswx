@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ujskylxwechat.kylxwechat.dao.ProjectDAO;
 import com.ujskylxwechat.kylxwechat.dao.UserDAO;
+import com.ujskylxwechat.kylxwechat.dataobject.InviteeDO;
 import com.ujskylxwechat.kylxwechat.dataobject.ProjectDO;
 import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
 import com.ujskylxwechat.kylxwechat.pojo.ProjectInfo;
@@ -35,6 +36,9 @@ public class ProjectController {
     public String projectcreate(@RequestBody ProjectDO projectDO){
         System.out.println(projectDO);
         int get=projectDAO.create(projectDO);
+        InviteeDO inviteeDO=new InviteeDO();
+        inviteeDO.setProjectId(projectDO.getId());
+        projectDAO.createinvitee(inviteeDO);
         //找到学生id为当前id的学生把项目id插入
         List<UserDO> users = userDAO.selectByStudentId(projectDO.getLeaderId());
         UserDO userDO = users.get(0);
@@ -51,17 +55,18 @@ public class ProjectController {
 
     @PostMapping("insertInviteeId")
     @ResponseBody
-    public String invite(@RequestParam("projectName") String projectName,@RequestParam("inviteeId") String inviteeId){
+    public String invite(@RequestParam("projectName") String projectName,@RequestParam("projectId") String projectId,@RequestParam("inviteeId") String inviteeId,@RequestParam("inviteeName") String inviteeName){
 
        ProjectDO projectDO = projectDAO.searchByProjectName(projectName);
+       InviteeDO inviteeDO=projectDAO.searchVisiteebyid(projectDO.getId());
         int res;
 //        System.out.println(projectDO.toString());
-        if (projectDO.getInvitee1Id()==null){
-           res  = projectDAO.insertInvitee1Id(inviteeId,projectName);
-        }else if (projectDO.getInvitee2Id()==null&&projectDO.getInvitee1Id()!=null){
-            res  = projectDAO.insertInvitee2Id(inviteeId,projectName);
-        }else if (projectDO.getInvitee3Id()==null&&projectDO.getInvitee1Id()!=null&&projectDO.getInvitee2Id()!=null){
-            res  = projectDAO.insertInvitee3Id(inviteeId,projectName);
+        if (inviteeDO.getInvitee1Id()==null){
+           res  = projectDAO.insertInvitee1Id(inviteeId,inviteeName,projectId);
+        }else if (inviteeDO.getInvitee2Id()==null&&inviteeDO.getInvitee1Id()!=null){
+            res  = projectDAO.insertInvitee2Id(inviteeId,inviteeName,projectId);
+        }else if (inviteeDO.getInvitee3Id()==null&&inviteeDO.getInvitee1Id()!=null&&inviteeDO.getInvitee2Id()!=null){
+            res  = projectDAO.insertInvitee3Id(inviteeId,inviteeName,projectId);
         }else{
             return "fail";
         }
@@ -89,13 +94,24 @@ public class ProjectController {
         return jsonArray;
     }
 
+    @PostMapping("getProjectId")
+    @ResponseBody
+    public JSONArray getProjectId(@RequestParam("leaderId")String leaderId) {
+        List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
+        ArrayList<Long> list = new ArrayList<>();
+        for (ProjectDO project : projects) {
+            list.add(project.getId());
+        }
+        JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
+        return jsonArray;
+    }
 
     @PostMapping("searchbyleaderid")
     @ResponseBody
     public int searchbyleaderid(@RequestParam("leaderId")String leaderId){
         System.out.println(1);
         System.out.println(leaderId);
-        System.out.println(projectDAO.searchByLeaderId(leaderId).size());
+        System.out.println(projectDAO.searchByLeaderId(leaderId).size()+"123");
         if(projectDAO.searchByLeaderId(leaderId).size()!=0){
             return 1;
         }else{
@@ -112,28 +128,32 @@ public class ProjectController {
     public JSONArray getProjectMessage(@RequestParam("leaderId")String leaderId){
         List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
         ArrayList<ProjectMessage> list = new ArrayList<>();
-        for (ProjectDO projectDO : projects) {
+        for (ProjectDO projectDO:projects){
+            InviteeDO inviteeDO=projectDAO.searchVisiteebyid(projectDO.getId());
             ProjectMessage projectMessage = new ProjectMessage();
             ArrayList<String> inviteeIds = new ArrayList<>();
+            ArrayList<String> inviteeNames = new ArrayList<>();
             //存储项目名称
             projectMessage.setProjectName(projectDO.getTitle());
             projectMessage.setLeaderId(leaderId);
 
-            if (!StringUtils.isEmpty(projectDO.getInvitee1Id())){
-                inviteeIds.add(projectDO.getInvitee1Id());
+            if (!StringUtils.isEmpty(inviteeDO.getInvitee1Id())){
+                inviteeIds.add(inviteeDO.getInvitee1Id());
+                inviteeNames.add(inviteeDO.getInvitee1Name());
             }
-            if (!StringUtils.isEmpty(projectDO.getInvitee2Id())){
-                inviteeIds.add(projectDO.getInvitee2Id());
+            if (!StringUtils.isEmpty(inviteeDO.getInvitee2Id())){
+                inviteeIds.add(inviteeDO.getInvitee2Id());
+                inviteeNames.add(inviteeDO.getInvitee2Name());
             }
-            if (!StringUtils.isEmpty(projectDO.getInvitee3Id())){
-                inviteeIds.add(projectDO.getInvitee3Id());
+            if (!StringUtils.isEmpty(inviteeDO.getInvitee3Id())){
+                inviteeIds.add(inviteeDO.getInvitee3Id());
+                inviteeNames.add(inviteeDO.getInvitee3Name());
             }
             //存储项目参与者id
             projectMessage.setInviteeIds(inviteeIds);
-
+            projectMessage.setInviteeNames(inviteeNames);
             list.add(projectMessage);
         }
-
 //        JSONObject json = (JSONObject)JSON.toJSON(projectMessage);
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
         return jsonArray;
@@ -142,11 +162,13 @@ public class ProjectController {
     @PostMapping("getProject")
     @ResponseBody
     public JSONArray getProject(@RequestParam("leaderId")String leaderId){
+        System.out.println(111);
         ArrayList<ProjectInfo> list = new ArrayList<>();
         List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
 
         for (ProjectDO project : projects) {
             ProjectInfo projectInfo = new ProjectInfo();
+            projectInfo.setProjectId(project.getId());
             projectInfo.setProjectType(project.getType());
             projectInfo.setProjectClass(project.getClasss());
             projectInfo.setProjectName(project.getTitle());
