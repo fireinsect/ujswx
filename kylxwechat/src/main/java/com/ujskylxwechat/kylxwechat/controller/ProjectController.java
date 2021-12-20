@@ -110,7 +110,7 @@ public class ProjectController {
     @ResponseBody
     public int searchbyleaderid(@RequestParam("leaderId")String leaderId){
         System.out.println(1);
-        System.out.println(leaderId);
+        System.out.println("leaderId："+leaderId);
         System.out.println(projectDAO.searchByLeaderId(leaderId).size()+"123");
         if(projectDAO.searchByLeaderId(leaderId).size()!=0){
             return 1;
@@ -154,7 +154,6 @@ public class ProjectController {
             projectMessage.setInviteeNames(inviteeNames);
             list.add(projectMessage);
         }
-//        JSONObject json = (JSONObject)JSON.toJSON(projectMessage);
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
         return jsonArray;
     }
@@ -169,17 +168,18 @@ public class ProjectController {
         for (ProjectDO project : projects) {
             ProjectInfo projectInfo = new ProjectInfo();
             projectInfo.setProjectId(project.getId());
-            projectInfo.setProjectType(project.getType());
-            projectInfo.setProjectClass(project.getClasss());
             projectInfo.setProjectName(project.getTitle());
-            projectInfo.setTeacherDepart(project.getTeacherCollege());
+            projectInfo.setSign(project.getSign());
             projectInfo.setTeacherName(project.getTeacherName());
-
+            projectInfo.setFilePath(project.getFilePath());
+            projectInfo.setTeacherDept(project.getTeacherCollege());
             list.add(projectInfo);
         }
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
         return jsonArray;
     }
+
+
 
 
 }

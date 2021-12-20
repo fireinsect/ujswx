@@ -12,9 +12,7 @@
         <result column="teacher_college" property="teacherCollege"></result>
         <result column="leader_id" property="leaderId"></result>
         <result column="filepath" property="filePath"></result>
-<!--        <result column="invitee1_id" property="invitee1Id"></result>-->
-<!--        <result column="invitee2_id" property="invitee2Id"></result>-->
-<!--        <result column="invitee3_id" property="invitee3Id"></result>-->
+        <result column="teacher_index" property="teacherIndex"></result>
         <result column="gmt_created" property="gmtCreated"></result>
         <result column="gmt_modified" property="gmtModified"></result>
     </resultMap>
@@ -60,4 +58,8 @@
     <update id="insertInvitee3Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.InviteeDO">
         update invitee set invitee3_id =#{param1},invitee3_name =#{param2},gmt_modified=now() where project_id = #{param3} limit 1
     </update>
+
+<!--    <update id="updateProject" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">-->
+<!--        update project set type=#{type},classs=#{classs},title=#{title},teacher_name=#{teacherName},leader_id=#{leaderId},,gmt_modified=now() where id = #{id} limit 1-->
+<!--    </update>-->
 </mapper>

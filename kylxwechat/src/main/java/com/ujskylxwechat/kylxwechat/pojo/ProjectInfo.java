@@ -15,10 +15,10 @@ import java.io.Serializable;
 public class ProjectInfo implements Serializable {
     private Long projectId;
     private String projectName;
-    private String projectType;
-    private String projectClass;
+    private String sign;
+    private String teacherDept;
+    private String filePath;
     private String teacherName;
-    private String teacherDepart;
     private final static String URL = "/pages/project/project";
 
 }
