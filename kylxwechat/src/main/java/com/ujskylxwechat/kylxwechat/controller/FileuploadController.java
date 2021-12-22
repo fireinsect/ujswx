@@ -1,5 +1,6 @@
 package com.ujskylxwechat.kylxwechat.controller;
 
+import com.ujskylxwechat.kylxwechat.dao.ProjectDAO;
 import com.ujskylxwechat.kylxwechat.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,25 +16,37 @@ import java.io.IOException;
 @Controller
 public class FileuploadController {
 
-//    final String url="https://threepigs.top";
-//    final String folderpath="/uploadfile";
-
+    final String rooturl="E:/temp";
+    final String applicationpath="/applicationfile";
+    final String overpath="/overfile";
     @Autowired
     UserDAO userDAO;
 
-    @PostMapping("fileupload")
+    @Autowired
+    ProjectDAO projectDAO;
+    @PostMapping("applicationupload")
     @ResponseBody
-    public String fileupload(MultipartFile file, Model model,String openid){
-        System.out.println(openid);
+    public String fileupload(MultipartFile file, Model model,Long projectId){
+        System.out.println(projectId);
+        String userfolder="/"+projectId;
+        String subname="";
         try {
+            File folder=new File(rooturl+userfolder);
+            if (!folder.exists()){
+                folder.mkdir();
+                File childfolder=new File(rooturl+userfolder+applicationpath);
+                childfolder.mkdir();
+                childfolder=new File(rooturl+userfolder+overpath);
+                childfolder.mkdir();
+            }
 //            file.transferTo(new File(url+folderpath+"/"+file.getOriginalFilename()));
-            System.out.println(file.getContentType());
             String fileName=file.getOriginalFilename();
-            String subname="";
+
+
             if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0){
                 subname= fileName.substring(fileName.lastIndexOf(".")+1);
             }
-            File check=new File("E:/temp/"+"az"+"."+subname);
+            File check=new File(rooturl+userfolder+applicationpath+"/"+projectId+"applicationfile."+subname);
                 if(check.exists()){
                     check.delete();
                     System.out.println("success");
@@ -43,6 +56,7 @@ public class FileuploadController {
             e.printStackTrace();
             model.addAttribute("msg","失败");
         }
+        projectDAO.insertapplication(projectId+"applicationfile."+subname,projectId);
         model.addAttribute("msg","成功");
         return "success";
     }

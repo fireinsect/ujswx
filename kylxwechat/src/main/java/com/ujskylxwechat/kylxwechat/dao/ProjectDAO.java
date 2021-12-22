@@ -2,6 +2,7 @@ package com.ujskylxwechat.kylxwechat.dao;
 
 import com.ujskylxwechat.kylxwechat.dataobject.InviteeDO;
 import com.ujskylxwechat.kylxwechat.dataobject.ProjectDO;
+import com.ujskylxwechat.kylxwechat.dataobject.ProjectFileDO;
 import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,14 +22,19 @@ public interface ProjectDAO {
 
      int createinvitee(InviteeDO inviteeDO);
 
+     int createfileurl(ProjectFileDO projectFileDO);
      List<ProjectDO> searchByLeaderId(@Param("leaderId") String leaderId);
 
      int insertInvitee1Id(String inviteeId,String inviteeName,String projectId);
      int insertInvitee2Id(String inviteeId,String inviteeName,String projectId);
      int insertInvitee3Id(String inviteeId,String inviteeName,String projectId);
 
+     int insertapplication(String url,Long projectId);
+     int insertover(String url,Long projectId);
+
      ProjectDO searchByProjectName(@Param("projectName") String projectName);
 
      InviteeDO searchVisiteebyid(@Param("projectId") Long projectId);
 
+     ProjectFileDO searchfilebyid(@Param("projectId") Long projectId);
 }

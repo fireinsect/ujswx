@@ -7,7 +7,9 @@ import com.ujskylxwechat.kylxwechat.dao.ProjectDAO;
 import com.ujskylxwechat.kylxwechat.dao.UserDAO;
 import com.ujskylxwechat.kylxwechat.dataobject.InviteeDO;
 import com.ujskylxwechat.kylxwechat.dataobject.ProjectDO;
+import com.ujskylxwechat.kylxwechat.dataobject.ProjectFileDO;
 import com.ujskylxwechat.kylxwechat.dataobject.UserDO;
+import com.ujskylxwechat.kylxwechat.pojo.InviteeInfo;
 import com.ujskylxwechat.kylxwechat.pojo.ProjectInfo;
 import com.ujskylxwechat.kylxwechat.pojo.ProjectMessage;
 import com.ujskylxwechat.kylxwechat.util.SqlSessionUtil;
@@ -38,7 +40,10 @@ public class ProjectController {
         int get=projectDAO.create(projectDO);
         InviteeDO inviteeDO=new InviteeDO();
         inviteeDO.setProjectId(projectDO.getId());
+        ProjectFileDO projectFileDO=new ProjectFileDO();
+        projectFileDO.setProjectId(projectDO.getId());
         projectDAO.createinvitee(inviteeDO);
+        projectDAO.createfileurl(projectFileDO);
         //找到学生id为当前id的学生把项目id插入
         List<UserDO> users = userDAO.selectByStudentId(projectDO.getLeaderId());
         UserDO userDO = users.get(0);
@@ -131,27 +136,30 @@ public class ProjectController {
         for (ProjectDO projectDO:projects){
             InviteeDO inviteeDO=projectDAO.searchVisiteebyid(projectDO.getId());
             ProjectMessage projectMessage = new ProjectMessage();
-            ArrayList<String> inviteeIds = new ArrayList<>();
-            ArrayList<String> inviteeNames = new ArrayList<>();
+            ArrayList<InviteeInfo> invitees = new ArrayList<>();
             //存储项目名称
             projectMessage.setProjectName(projectDO.getTitle());
             projectMessage.setLeaderId(leaderId);
-
             if (!StringUtils.isEmpty(inviteeDO.getInvitee1Id())){
-                inviteeIds.add(inviteeDO.getInvitee1Id());
-                inviteeNames.add(inviteeDO.getInvitee1Name());
+                InviteeInfo inviteeInfo=new InviteeInfo();
+                inviteeInfo.setInviteeId(inviteeDO.getInvitee1Id());
+                inviteeInfo.setInviteeName(inviteeDO.getInvitee1Name());
+                invitees.add(inviteeInfo);
             }
             if (!StringUtils.isEmpty(inviteeDO.getInvitee2Id())){
-                inviteeIds.add(inviteeDO.getInvitee2Id());
-                inviteeNames.add(inviteeDO.getInvitee2Name());
+                InviteeInfo inviteeInfo=new InviteeInfo();
+                inviteeInfo.setInviteeId(inviteeDO.getInvitee2Id());
+                inviteeInfo.setInviteeName(inviteeDO.getInvitee2Name());
+                invitees.add(inviteeInfo);
             }
             if (!StringUtils.isEmpty(inviteeDO.getInvitee3Id())){
-                inviteeIds.add(inviteeDO.getInvitee3Id());
-                inviteeNames.add(inviteeDO.getInvitee3Name());
+                InviteeInfo inviteeInfo=new InviteeInfo();
+                inviteeInfo.setInviteeId(inviteeDO.getInvitee2Id());
+                inviteeInfo.setInviteeName(inviteeDO.getInvitee2Name());
+                invitees.add(inviteeInfo);
             }
             //存储项目参与者id
-            projectMessage.setInviteeIds(inviteeIds);
-            projectMessage.setInviteeNames(inviteeNames);
+            projectMessage.setInvitees(invitees);
             list.add(projectMessage);
         }
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
@@ -171,8 +179,9 @@ public class ProjectController {
             projectInfo.setProjectName(project.getTitle());
             projectInfo.setSign(project.getSign());
             projectInfo.setTeacherName(project.getTeacherName());
-            projectInfo.setFilePath(project.getFilePath());
+//            projectInfo.setFilePath(project.getFilePath());
             projectInfo.setTeacherDept(project.getTeacherCollege());
+//            System.out.println(project.getFilePath());
             list.add(projectInfo);
         }
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));

@@ -37,13 +37,6 @@ public class ProjectDO {
      */
     private String leaderId;
 
-    /**
-     * 文件路径
-     */
-    private String filePath;
-
-    private Long teacherIndex;
-
     private LocalDateTime gmtCreated;
 
     private LocalDateTime gmtModified;
