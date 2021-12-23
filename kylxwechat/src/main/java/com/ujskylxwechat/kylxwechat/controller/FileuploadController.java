@@ -27,7 +27,6 @@ public class FileuploadController {
     @PostMapping("applicationupload")
     @ResponseBody
     public String fileupload(MultipartFile file, Model model,Long projectId){
-        System.out.println(projectId);
         String userfolder="/"+projectId;
         String subname="";
         try {
@@ -58,6 +57,7 @@ public class FileuploadController {
         }
         projectDAO.insertapplication(projectId+"applicationfile."+subname,projectId);
         model.addAttribute("msg","成功");
+        System.out.println("文件上传");
         return "success";
     }
 }

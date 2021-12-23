@@ -61,9 +61,14 @@
     <select id="searchfilebyid" resultMap="fileResultMap">
         select * from projectfile where project_id=#{projectId}
     </select>
+
     <update id="projectupdate" parameterType="com.ujskylxwechat.kylxwechat.dataobject.ProjectDO">
-        update project set title=#{title},type=#{type},classs=#{classs},sign=#{sign},teacher_name=#{teacherName},teacher_college=#{teacherCollege}
+        update project set title=#{title},type=#{type},classs=#{classs},sign=#{sign},teacher_name=#{teacherName},
+            teacher_college=#{teacherCollege},gmt_modified=now()
+            where
+            id=#{id} limit 1
     </update>
+
 <!--    插入参与者id-->
     <update id="insertInvitee1Id" parameterType="com.ujskylxwechat.kylxwechat.dataobject.InviteeDO">
         update invitee set invitee1_id =#{param1},invitee1_name =#{param2},gmt_modified=now() where project_id = #{param3} limit 1

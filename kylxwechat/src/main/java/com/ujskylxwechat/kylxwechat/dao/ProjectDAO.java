@@ -25,6 +25,8 @@ public interface ProjectDAO {
      int createfileurl(ProjectFileDO projectFileDO);
      List<ProjectDO> searchByLeaderId(@Param("leaderId") String leaderId);
 
+     int projectupdate(ProjectDO projectDO);
+
      int insertInvitee1Id(String inviteeId,String inviteeName,String projectId);
      int insertInvitee2Id(String inviteeId,String inviteeName,String projectId);
      int insertInvitee3Id(String inviteeId,String inviteeName,String projectId);

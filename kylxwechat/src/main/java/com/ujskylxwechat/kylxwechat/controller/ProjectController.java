@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,6 +177,7 @@ public class ProjectController {
         List<ProjectDO> projects = projectDAO.searchByLeaderId(leaderId);
 
         for (ProjectDO project : projects) {
+            ProjectFileDO projectFileDO=projectDAO.searchfilebyid(project.getId());
             ProjectInfo projectInfo = new ProjectInfo();
             projectInfo.setProjectId(project.getId());
             projectInfo.setProjectName(project.getTitle());
@@ -181,15 +185,26 @@ public class ProjectController {
             projectInfo.setTeacherName(project.getTeacherName());
 //            projectInfo.setFilePath(project.getFilePath());
             projectInfo.setTeacherDept(project.getTeacherCollege());
+            projectInfo.setApplicationPath(projectFileDO.getApplicationUrl());
 //            System.out.println(project.getFilePath());
             list.add(projectInfo);
         }
         JSONArray jsonArray = JSON.parseArray(JSON.toJSONString(list));
         return jsonArray;
     }
+    @PostMapping("/projectUpdate")
+    @ResponseBody
+    public String projectUpdate(ProjectDO projectDO){
+        System.out.println(projectDO.toString());
+        int a=projectDAO.projectupdate(projectDO);
+        System.out.println(a);
+        if(a==1){
+            return "success";
+        }else{
+            return "fail";
+        }
 
-
-
+    }
 
 }
 

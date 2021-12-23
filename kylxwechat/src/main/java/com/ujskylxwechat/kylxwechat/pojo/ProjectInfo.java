@@ -17,7 +17,7 @@ public class ProjectInfo implements Serializable {
     private String projectName;
     private String sign;
     private String teacherDept;
-    private String filePath;
+    private String applicationPath;
     private String teacherName;
     private final static String URL = "/pages/project/project";
 
