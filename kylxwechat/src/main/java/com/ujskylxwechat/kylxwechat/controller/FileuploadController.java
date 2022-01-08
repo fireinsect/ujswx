@@ -5,18 +5,19 @@ import com.ujskylxwechat.kylxwechat.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @Controller
 public class FileuploadController {
-
-    final String rooturl="E:/temp";
+    private String rooturl="";
     final String applicationpath="/applicationfile";
     final String overpath="/overfile";
     @Autowired
@@ -26,7 +27,10 @@ public class FileuploadController {
     ProjectDAO projectDAO;
     @PostMapping("applicationupload")
     @ResponseBody
-    public String fileupload(MultipartFile file, Model model,Long projectId){
+    public String fileupload(MultipartFile file, Model model,Long projectId,HttpServletRequest request){
+        System.out.println("上传ing4");
+        rooturl = "/www/wwwroot/fireinsect.top/test";
+        System.out.println(rooturl);
         String userfolder="/"+projectId;
         String subname="";
         try {
