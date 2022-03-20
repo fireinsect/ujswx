@@ -25,6 +25,7 @@ public class WxLoginController {
     @ResponseBody
     public String Login(@RequestParam("code") String code,
                         @RequestBody UserInfo userInfo)throws Exception{
+        System.out.println("1:"+code);
         if (StringUtils.isBlank(code)){
             return "参数不能为空";
         }
@@ -34,12 +35,12 @@ public class WxLoginController {
         paramsMap.put("secret", WxLoginUtil.APP_SECRET);
         paramsMap.put("js_code", code);
         paramsMap.put("grant_type", "authorization_code");
-
+        System.out.println("2:"+WxLoginUtil.APPID);
         //获取用户的信息
         Map<String, String> resultMap = new WxHttpUtil().getMessage(WxLoginUtil.AUTH_URL, paramsMap);
         String openId = resultMap.get("openid");
         String session_key = resultMap.get("session_key");
-
+        System.out.println("3:"+code);
         //将获取openID和sessionKey放入userInfo类中
         userInfo.setOpenId(openId);
         userInfo.setSessionKey(session_key);

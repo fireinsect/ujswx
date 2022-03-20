@@ -44,4 +44,17 @@
         </set>
             where  student_id=#{studentId}
     </update>
+
+    <update id="userUpdate" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO">
+        update user
+        <set>
+            mobile_number=#{mobileNumber},
+            email=#{email},
+            college=#{college},
+            major=#{major},
+            classs=#{classs},
+            gmt_modified=now()
+        </set>
+        where  student_id=#{studentId}
+    </update>
 </mapper>

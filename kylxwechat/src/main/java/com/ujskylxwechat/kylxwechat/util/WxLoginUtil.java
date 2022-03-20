@@ -11,11 +11,11 @@ public class WxLoginUtil {
     /**
      * 申请小程序的AppId
      */
-    public static final String APPID = "wxcc6ee7b182d33541";
+    public static final String APPID = "wx82b2a932815899c3";
     /**
      * 生成的AppSecret
      */
-    public static final String APP_SECRET = "0de987ca19ef720fc97da57491e0e590";
+    public static final String APP_SECRET = "af12c9a68c36f3c3578119c344b44efd";
 
     /**
      * 请求微信后端的地址

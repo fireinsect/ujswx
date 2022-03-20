@@ -20,4 +20,6 @@ public interface UserDAO {
 
 
     int updateProjectIdForUser(UserDO userDO);
+
+    int userUpdate(UserDO userDO);
 }
