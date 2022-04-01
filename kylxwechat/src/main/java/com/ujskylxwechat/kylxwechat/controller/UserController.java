@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -24,6 +23,7 @@ public class UserController {
     @ResponseBody
     public String adduser(@RequestBody UserDO userDO){
         int re=userDAO.insert(userDO);
+        System.out.println(userDO);
         if(re==1){
             return "success";
         }else{
@@ -52,7 +52,7 @@ public class UserController {
         userDO.setEmail(student.getEmail());
         userDO.setClasss(student.getClasss());
         userDO.setCollege(student.getCollege());
-        userDO.setMajor(student.getMajor());
+        userDO.setEducationBackground(student.getEducationBackground());
         int re=userDAO.userUpdate(userDO);
         Result result=new Result();
         if(re!=0){

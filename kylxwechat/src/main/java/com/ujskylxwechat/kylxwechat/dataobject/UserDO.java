@@ -18,13 +18,16 @@ public class UserDO {
 
     private String email;
 
+    private String educationBackground;
+
     /*所属学院*/
     private String college;
 
-    /*所属专业*/
-    private String major;
+//    /*所属专业*/
+//    private String major;
 
-    /*班级*/
+
+    /*专业班级*/
     private String classs;
 
     private Long projectId;
@@ -35,18 +38,5 @@ public class UserDO {
 
     private LocalDateTime gmtModified;
 
-
-
-    @Override
-    public String toString(){
-        return "name:" +this.getName()
-                +"\nopenid:"+this.getOpenid()
-                +"\nstudent_id:"+this.getStudentId()
-                +"\nmobile_number:"+this.getMobileNumber()
-                +"\nemail:"+this.getEmail()
-                +"\ncollege:"+this.getCollege()
-                +"\nmajor:"+this.getMajor()
-                +"\nclasss:"+this.getClasss();
-    }
 
 }

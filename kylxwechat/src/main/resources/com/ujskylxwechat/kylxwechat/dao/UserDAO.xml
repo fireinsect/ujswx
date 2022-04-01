@@ -10,7 +10,7 @@
         <result column="mobile_number" property="mobileNumber"></result>
         <result column="email" property="email"></result>
         <result column="college" property="college"></result>
-        <result column="major" property="major"></result>
+        <result column="education_background" property="educationBackground"></result>
         <result column="classs" property="classs"></result>
         <result column="project_id" property="projectId"></result>
         <result column="permission" property="permission"></result>
@@ -21,10 +21,12 @@
     <insert id="insert" parameterType="com.ujskylxwechat.kylxwechat.dataobject.UserDO"
     useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user(openid,name,student_id,mobile_number
-        ,email,college,major,classs,project_id,permission,gmt_created,gmt_modified)
+        ,email,college,education_background,classs,project_id,permission,gmt_created,gmt_modified)
         VALUE
         (#{openid},#{name},#{studentId},#{mobileNumber},#{email}
-            ,#{college},#{major},#{classs},#{projectId},#{permission},now(),now())
+            ,#{college},
+            #{educationBackground}
+            ,#{classs},#{projectId},#{permission},now(),now())
     </insert>
 
     <select id="selectByOpenid" resultMap="userResultMap">
@@ -51,7 +53,7 @@
             mobile_number=#{mobileNumber},
             email=#{email},
             college=#{college},
-            major=#{major},
+            education_background=#{educationBackground}
             classs=#{classs},
             gmt_modified=now()
         </set>

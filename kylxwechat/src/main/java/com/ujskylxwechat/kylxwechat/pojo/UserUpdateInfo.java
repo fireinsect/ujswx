@@ -10,6 +10,7 @@ public class UserUpdateInfo implements Serializable {
     String email;
     String mobileNumber;
     String college;
-    String major;
+//    String major;
+    String educationBackground;
     String classs;
 }
